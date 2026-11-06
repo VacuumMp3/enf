@@ -35,7 +35,7 @@ class CatalogView(TemplateView):
         "color": lambda queryset, value: queryset.filter(color__iexact=value),
         "min_price": lambda queryset, value: queryset.filter(price_gte=value),
         "max_price": lambda queryset, value: queryset.filter(price_lte=value),
-        "size": lambda queryset, value: queryset.filter(product_size__size__name=value),
+        "size": lambda queryset, value: queryset.filter(product_sizes__size__name=value),
     }
 
 
@@ -111,7 +111,7 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = "main/base.html"
     slug_field = "slug"
-    slug_url_kwargs = "slug"
+    slug_url_kwarg = "slug"
 
 
     def get_context_data(self, **kwargs):
@@ -120,7 +120,7 @@ class ProductDetailView(DetailView):
 
         context["categories"] = Category.objects.all()
         context["related_products"] = Product.objects.filter(
-            category=Product.category
+            category=product.category
         ).exclude(id=product.id)[:4]
 
         context["current_category"] = product.category.slug
@@ -129,8 +129,7 @@ class ProductDetailView(DetailView):
 
 
     def get(self, request, *args, **kwargs):
-
-        self.objects = self.get_object()
+        self.object = self.get_object()
         context = self.get_context_data(**kwargs)
 
         if self.request.headers.get("HX-Request"):
