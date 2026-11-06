@@ -25,6 +25,32 @@ urlpatterns = [
     path("", include("main.urls", namespace="main"))
 ]
 
+                # <a href="{% url 'users:profile' %}" 
+                # hx-get="{% url 'users:profile' %}" 
+
+                #     <a href="{% url 'users:profile' %}" 
+                #     hx-get="{% url 'users:profile' %}" 
+                #     hx-target="#main-content" 
+                # hx-push-url="true"
+                # class="text-sm font-medium text-gray-900 uppercase hover:text-gray-600">
+                #     ACCOUNT
+                # </a>
+
+            #                 function updateCartCount() {
+            #     fetch('{% url "cart:cart_count" %}')
+            #         .then(response => response.json())
+            #         .then(data => {
+            #             updateHeaderCartCount(data.total_items);
+            #         });
+            # }
+    
+            # function openCart() {
+            #     htmx.ajax('GET', '{% url "cart:cart_modal" %}', {
+            #         target: '#cart-container',
+            #         swap: 'innerHTML'
+            #     });
+            # }
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

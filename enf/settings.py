@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
+    'cart',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -143,3 +144,8 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+
+SESSION_COOKIE_AGE = 86400 # 30 дней
+SESSION_SAVE_EVERY_REQUEST = True
