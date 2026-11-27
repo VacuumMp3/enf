@@ -67,9 +67,6 @@ class Cart(models.Model):
         self.items.all().delete()
  
 
-
-
-
 class CartItem(models.Model):
     """ Товар в корзине """
 
@@ -90,4 +87,4 @@ class CartItem(models.Model):
 
     @property
     def total_price(self):
-        return Decimal(str(self.product.price) * self.quantity)
+        return Decimal(str(self.product.price)) * self.quantity

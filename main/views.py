@@ -21,6 +21,7 @@ class IndexView(TemplateView):
 
 
     def get(self, request, *args, **kwargs):
+        """ GET - запрос """
         context = self.get_context_data(**kwargs)
         if request.headers.get("HX-Request"):
             return TemplateResponse(request, "main/home_content.html", context)
@@ -55,7 +56,7 @@ class CatalogView(TemplateView):
         query = self.request.GET.get("q")
         if query:
             products = products.filter(
-                Q(name__icontains=query |  Q(description__icontains=query))
+                Q(name__icontains=query) |  Q(description__icontains=query)
             ) 
 
         filter_params = {}
@@ -134,5 +135,5 @@ class ProductDetailView(DetailView):
 
         if self.request.headers.get("HX-Request"):
             return TemplateResponse(request, "main/product_detail.html", context)
-        raise TemplateResponse(request, self.template_name, context)
+        return TemplateResponse(request, self.template_name, context)
 
